@@ -1,9 +1,10 @@
+import {detailedBook} from './kdc.js';
 export const CATEGORIES=['총류','철학','종교','사회과학','자연과학','기술과학','예술','언어','문학','역사'];
 export const COLORS=['#557968','#bd7060','#bd9b58','#537e99','#a3808b','#8eaf92','#d0ac55','#a38466','#496a5d','#c2b28c'];
 export const TITLES=[['도서관의 모든 것','처음 만나는 정보'],['마음을 읽는 철학','생각의 산책'],['세계의 종교','신화와 믿음'],['도시와 사람들','우리 사회 이야기'],['별을 보는 밤','작은 식물 도감'],['생활 속 발명','건축의 시작'],['그림을 읽는 시간','음악의 정원'],['우리말의 발견','처음 배우는 영어'],['계절의 문장','작은 숲의 이야기'],['시간을 걷다','세계사 산책']];
 export const DAY_NAMES=['첫 출근','책과 친해지는 날','바쁜 오후의 시작','도서관의 작은 문제들','마지막 근무, 좋은 마무리'];
-export function makeBook(id,category){return {id,category,title:TITLES[category][Number(id.replace(/\D/g,''))%2],code:String(category*100).padStart(3,'0')}}
-export function dayConfig(day){return {shelved:4+day,collected:day<3?2:3,transactions:2,questions:2,fixed:1,displayed:1}}
+export function makeBook(id,category){return detailedBook(id,category)}
+export function dayConfig(day){return {shelved:3+Math.floor(day/2),collected:2,transactions:2,questions:3,fixed:1,displayed:1}}
 export const TASK_NAMES={shelved:'책을 알맞은 서가에 정리',collected:'흩어진 책 수거',transactions:'대출·반납 처리',questions:'이용자 문의 해결',fixed:'도서관 문제 해결',displayed:'전시 책 배치'};
 export function newProgress(){return {shelved:0,collected:0,transactions:0,questions:0,fixed:0,displayed:0}}
 export function complete(state){let goal=dayConfig(state.day);return Object.keys(goal).every(k=>state.progress[k]>=goal[k])}

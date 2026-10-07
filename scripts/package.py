@@ -5,7 +5,7 @@ root=Path(__file__).resolve().parents[1]
 dist=root/'dist'
 assets={f'assets/{p.name}':base64.b64encode(p.read_bytes()).decode() for p in (dist/'assets').iterdir() if p.suffix in ['.glb','.json']}
 code=[]
-for name in ['engine.js','core.js','game.js']:
+for name in ['engine.js','kdc.js','core.js','service.js','audio.js','game.js']:
     js=(dist/name).read_text()
     js=re.sub(r'^import .*?;\s*','',js,flags=re.M)
     js=re.sub(r'\bexport\s+(?=const |function |async function |class )','',js)
