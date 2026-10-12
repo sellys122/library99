@@ -3,9 +3,9 @@ from pathlib import Path
 import base64, json, re, zipfile
 root=Path(__file__).resolve().parents[1]
 dist=root/'dist'
-assets={f'assets/{p.name}':base64.b64encode(p.read_bytes()).decode() for p in (dist/'assets').iterdir() if p.suffix in ['.glb','.json']}
+assets={f'assets/{p.name}':base64.b64encode(p.read_bytes()).decode() for p in (dist/'assets').iterdir() if p.suffix in ['.glb','.json','.png']}
 code=[]
-for name in ['engine.js','kdc.js','core.js','service.js','audio.js','game.js']:
+for name in ['engine.js','kdc.js','core.js','service.js','shelving.js','operations.js','audio.js','game.js']:
     js=(dist/name).read_text()
     js=re.sub(r'^import .*?;\s*','',js,flags=re.M)
     js=re.sub(r'\bexport\s+(?=const |function |async function |class )','',js)
@@ -16,6 +16,8 @@ script='window.LIBRARY_EMBEDDED='+json.dumps(assets,separators=(',',':'))+';\n'+
 html=html.replace('<script type="module" src="game.js"></script>','<script type="module">'+script+'</script>')
 # Home button should reopen the standalone file as well.
 html=html.replace('href="./"','href="play.html"')
+# Embed the ending image for standalone play as well.
+html=html.replace('src=\"assets/fired.png\"', 'src=\"data:image/png;base64,'+assets.get('assets/fired.png','')+'\"')
 (dist/'play.html').write_text(html)
 out=root.parent/'library99.zip'
 with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:

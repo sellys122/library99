@@ -146,12 +146,12 @@ const EXTRA_REQUESTS={
  '980':['다음 여행지의 지도랑 명소를 찾아볼 만한 책이 있나요?']
 };
 export const GUIDE_TOPICS=REQUEST_ROWS.map(([section,subject,request])=>({section,subject,prefix:section,title:subject,requests:[request,...(EXTRA_REQUESTS[section]||[])]}));
-export function sectionName(code){return KDC_SECTIONS.flat().find(([c])=>c===code)?.[1]||'총류'}
+export function sectionName(code){let major=['총류','철학','종교','사회과학','자연과학','기술과학','예술','언어','문학','역사'];return KDC_SECTIONS.flat().find(([c])=>c===code)?.[1]||(Number(code)%100===0?major[Number(code)/100]:'총류')||'총류'}
 // Keep in-progress saved enquiries consistent with the current precise topic.
-export function normalizeGuideTopic(guide){if(!guide)return guide;let topic=GUIDE_TOPICS.find(t=>t.section===guide.section);return topic?{...guide,subject:topic.subject,request:topic.requests.includes(guide.request)?guide.request:topic.requests[0]}:guide}
+export function normalizeGuideTopic(guide){if(!guide||guide.catalogRequest)return guide;let topic=GUIDE_TOPICS.find(t=>t.section===guide.section);return topic?{...guide,subject:topic.subject,request:topic.requests.includes(guide.request)?guide.request:topic.requests[0]}:guide}
 export function guideQuestion(guide){return normalizeGuideTopic(guide)?.request||'찾는 책의 내용을 안내해 주세요.'}
 export function topicForCategory(category,seed=0){let list=BOOK_TOPICS.filter(t=>Math.floor(Number(t.section)/100)===category);return list[Math.abs(seed)%list.length]}
-export function detailedBook(id,category){let digits=Number(id.replace(/\D/g,''))||0,t=topicForCategory(category,digits),decimal=String((digits*37+125)%1000).padStart(3,'0');return {id,category,title:t.title,section:t.section,code:`${t.prefix}.${decimal}`}}
+export function detailedBook(id,category){let digits=Number(id.replace(/\D/g,''))||0,t=topicForCategory(category,digits),decimal=String((digits*37+125)%1000).padStart(3,'0');return {id,category,title:t.title,section:t.section,code:`${t.prefix}.${String((digits*37+12)%100).padStart(2,'0')}가${(digits*13+12)%900+1}ㄴ`}}
 export function sectionOptions(category,correct){let sections=KDC_SECTIONS[category].map(([c])=>c),others=sections.filter(c=>c!==correct);return [correct,...others.slice(0,2)]}
 export const EVENTS=[
  {name:'뜨개질 초보의 목도리 구조대',date:'2026년 10월 10일(토) 14:00–16:00',registration:'홈페이지 프로그램 메뉴 접수',capacity:12,place:'1층 문화교실'},
