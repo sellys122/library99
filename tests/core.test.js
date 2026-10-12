@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {CATEGORIES,makeBook,dayConfig,newProgress,complete,addProgress,canShelve,blocked,pathfind,transferBook,libraryDaylight} from '../dist/core.js';
+import {CATEGORIES,makeBook,dayConfig,newProgress,complete,addProgress,canShelve,blocked,pathfind,transferBook,libraryDaylight,newDash,advanceDash} from '../dist/core.js';
 import {readFileSync} from 'node:fs';
 const layout=JSON.parse(readFileSync(new URL('../dist/assets/layout.json',import.meta.url)));
 test('KDC books have decimal classification and author symbols and correct major shelf',()=>{assert.equal(CATEGORIES.length,10);for(let i=0;i<10;i++){let b=makeBook('book1',i);assert.match(b.code,/^\d{3}\.\d{1,2}[가-힣]+\d+[가-힣ㄱ-ㅎ]+$/);assert.equal(Math.floor(parseFloat(b.code)/100),i);assert.equal(canShelve(b,i),true);assert.equal(canShelve(b,(i+1)%10),false)}});
@@ -11,3 +11,7 @@ test('book cart paths avoid corners and all floor book positions are accessible'
 test('walls and furniture block player and cart movement',()=>{assert.equal(blocked(13,0,layout.colliders),true);assert.equal(blocked(-6.4,7.4,layout.colliders),true);assert.equal(blocked(7.3,6.7,layout.colliders),true);assert.equal(blocked(0,-5.6,layout.colliders),true);assert.equal(blocked(0,7,layout.colliders),false)});
 
 test('outside lighting follows 09:00 opening and continuous 16:00-18:00 sunset',()=>{let at=hour=>libraryDaylight((hour-9)/9*360);assert.equal(at(9).sunrise,1);assert.equal(at(12).sunrise,0);assert.equal(at(16).sunset,0);assert.equal(at(17).sunset,.5);assert.equal(at(18).sunset,1);assert.ok(at(17).sky[1]<at(16).sky[1]);assert.ok(at(18).level<at(17).level);assert.equal(at(18).hour,18);assert.equal(libraryDaylight(999).hour,18)});
+
+test('dash lasts twenty seconds and locks until the full sixty-second recharge',()=>{let d=newDash();assert.equal(advanceDash(d,10,true,true),true);assert.equal(d.energy,10);assert.equal(advanceDash(d,10,true,true),true);assert.equal(d.phase,'recharging');assert.equal(d.energy,0);assert.equal(advanceDash(d,30,true,true),false);assert.equal(d.energy,10);assert.equal(d.phase,'recharging');assert.equal(advanceDash(d,30,true,true),false);assert.equal(d.energy,20);assert.equal(d.phase,'ready');assert.equal(advanceDash(d,1,true,true),true);assert.equal(d.energy,19)});
+test('dash does not consume energy while standing or pulling the book cart',()=>{let d=newDash();assert.equal(advanceDash(d,10,true,false),false);assert.equal(advanceDash(d,10,true,true,true),false);assert.equal(d.energy,20)});
+test('relocated search terminal and its waiting spots remain reachable',()=>{assert.deepEqual(layout.search,{x:2.2,z:6.8});for(let p of [{x:2.2,z:8},{x:3.15,z:8.6},{x:3.15,z:9.32}]){assert.equal(blocked(p.x,p.z,layout.colliders,.3),false);assert.ok(pathfind({x:0,z:9},p,layout.colliders).length>0)}});

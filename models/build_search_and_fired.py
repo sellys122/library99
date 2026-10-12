@@ -22,7 +22,7 @@ label('CATALOGUE',(0,.17,.44),.10)
 bpy.ops.object.select_all(action='SELECT');bpy.context.view_layer.objects.active=next(o for o in bpy.context.scene.objects if o.type=='MESH');bpy.ops.object.join();o=bpy.context.object;o.name='search';bpy.context.scene.cursor.location=(0,0,0);bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
 bpy.ops.export_scene.gltf(filepath=os.path.join(ASSETS,'search.glb'),export_format='GLB',use_selection=True,export_apply=True)
 bpy.ops.wm.save_as_mainfile(filepath=os.path.join(ROOT,'models','search-terminal.blend'))
-path=os.path.join(ASSETS,'layout.json');layout=json.load(open(path));layout['search']={'x':10.65,'z':3.6};layout['colliders']=[c for c in layout['colliders'] if c['id']!='search']+[{'id':'search','x':10.65,'z':3.6,'w':1.14,'d':.98}];json.dump(layout,open(path,'w'),ensure_ascii=False,indent=2)
+path=os.path.join(ASSETS,'layout.json');layout=json.load(open(path));layout['search']={'x':2.2,'z':6.8};layout['colliders']=[c for c in layout['colliders'] if c['id']!='search']+[{'id':'search','x':2.2,'z':6.8,'w':1.14,'d':.98}];json.dump(layout,open(path,'w'),ensure_ascii=False,indent=2)
 bpy.ops.wm.open_mainfile(filepath=os.path.join(ROOT,'models','library.blend'))
 root=bpy.data.objects.get('librarian_root');root.location=(0,0,0)
 keep={root,*root.children_recursive}
