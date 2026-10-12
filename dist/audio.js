@@ -8,6 +8,7 @@ export class LibraryAudio{
  if(ringing&&this.fx&&now>=this.nextRing){for(let offset of [0,.19,.42,.61]){this.tone(440,now+offset,.14,'square',.15,0,true);this.tone(480,now+offset,.14,'sine',.25,0,true)}this.nextRing=now+2.4}if(!ringing)this.nextRing=now
  if(searchAlarm&&this.fx&&now>=(this.nextSearchBeep||0)){this.tone(720,now,.08,'sine',.012,0,true);this.tone(720,now+.18,.08,'sine',.012,0,true);this.nextSearchBeep=now+4}if(!searchAlarm)this.nextSearchBeep=now
  }
+ clockTick(){if(this.fx&&this.context&&this.unlocked)this.tone(1100,this.context.currentTime,.035,'triangle',.018,0,true)}
  success(){if(this.fx&&this.context){let t=this.context.currentTime;for(let[i,f]of [523.25,659.25,783.99].entries())this.tone(f,t+i*.07,.15,'triangle',.17,0,true)}}
  failure(){if(this.fx&&this.context){let t=this.context.currentTime;this.tone(196,t,.24,'sawtooth',.20,-12,true);this.tone(146.83,t+.18,.35,'triangle',.23,-17,true)}}
 }
