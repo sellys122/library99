@@ -19,3 +19,6 @@ export function pathfind(start,end,colliders,r=.29){const step=.5,W=49,H=41,toCe
  if(!found)return [];let result=[],k=endKey;while(k!==key(...s)){result.push(point([k%W,Math.floor(k/W)]));k=parent.get(k);if(k===undefined)return []}return result.reverse();
 }
 export function transferBook(from,to,id,capacity){if(to.length>=capacity)return {ok:false,reason:'full'};let i=from.findIndex(b=>b.id===id);if(i<0)return {ok:false,reason:'missing'};to.push(from.splice(i,1)[0]);return {ok:true}}
+
+// Shift lighting follows the same paused work clock as service timers.
+export function libraryDaylight(elapsed,duration=360){let phase=Math.max(0,Math.min(1,elapsed/duration)),hour=9+phase*9,sunset=Math.max(0,Math.min(1,(hour-16)/2)),sunrise=Math.max(0,1-(hour-9)),warmth=Math.max(sunrise*.42,sunset),level=1-sunset*.28;let sky=sunset>0?[.68+.20*sunset,.83-.39*sunset,.89-.46*sunset]:[.68+.12*sunrise,.83-.04*sunrise,.89-.16*sunrise];return {phase,hour,sunset,sunrise,warmth,level,sky,label:hour<10?'오전 햇빛':hour<16?'맑은 낮':hour<17?'해가 기우는 오후':'노을 지는 도서관'}}

@@ -16,8 +16,7 @@ script='window.LIBRARY_EMBEDDED='+json.dumps(assets,separators=(',',':'))+';\n'+
 html=html.replace('<script type="module" src="game.js"></script>','<script type="module">'+script+'</script>')
 # Home button should reopen the standalone file as well.
 html=html.replace('href="./"','href="play.html"')
-# Embed the ending image for standalone play as well.
-html=html.replace('src=\"assets/fired.png\"', 'src=\"data:image/png;base64,'+assets.get('assets/fired.png','')+'\"')
+# Ending images read from LIBRARY_EMBEDDED at runtime, avoiding duplicate PNG data.
 (dist/'play.html').write_text(html)
 out=root.parent/'library99.zip'
 with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:

@@ -69,4 +69,14 @@ export function failRequest(state,n,reason='timeout',chosen=''){if(!unresolved(n
 }
 export function expireRequests(state){let expired=[];for(let n of activeRequests(state))if(!n.timerStopped&&n.deadline!=null&&state.elapsed>=n.deadline){let c=failRequest(state,n);if(c)expired.push(c)}return expired}
 export function deliverComplaints(state,day,final=false){let inbox=state.complaints.filter(c=>!c.delivered&&(c.deliveryDay<=day||(final&&c.sourceDay===day)));for(let c of inbox){c.delivered=true;c.receivedDay=day}state.inbox=inbox;if(inbox.some(c=>c.channel==='national')&&!state.nationalDays.includes(day))state.nationalDays.push(day);state.nationalDays.sort((a,b)=>a-b);if(state.nationalDays.length>=3){state.ended=true;state.fired=true}return inbox}
-export function closeServiceDay(state){if(state.shiftClosed)return state.reviews.find(r=>r.day===state.day);for(let n of activeRequests(state))failRequest(state,n,'closing');state.shiftClosed=true;let r={day:state.day,elapsed:state.elapsed,score:state.score,answered:state.answered,failures:state.failures.map(c=>({...c})),seniorAnger:(state.seniorAnger||[]).map(a=>({...a})),progress:{...state.progress}};state.reviews.push(r);return r}
+
+export function reviewUnfiledBooks(state){let floor=state.floor?.length||0,cart=state.cart?.books?.length||0,hands=state.hands?.length||0,total=floor+cart+hands;
+ if(!total){state.unfiledBookStreak=0;state.unfiledBookLastDay=state.day;return {floor,cart,hands,total,streak:0}}
+ let streak=state.unfiledBookLastDay===state.day-1?(state.unfiledBookStreak||0)+1:1;state.unfiledBookStreak=streak;state.unfiledBookLastDay=state.day;
+ let counts=`바닥 ${floor}권 · 북카트 ${cart}권 · 손에 든 책 ${hands}권`,text=`퇴근 전에 책을 서가에 배가해야죠! ${counts}이 남아 있습니다.`;
+ if(streak===1){state.seniorAnger??=[];state.seniorAnger.push({id:`d${state.day}-unfiled`,name:'상급자',action:'배가하지 않은 책을 남기고 퇴근함',text})}
+ else{let c={id:`d${state.day}-unfiled-complaint`,sourceDay:state.day,deliveryDay:state.day+1,name:'자료실 이용자',channel:'board',subject:'이틀 연속 퇴근 때 배가되지 않은 도서',reason:'unfiled-books',response:`${counts}을 배가하지 않은 채 퇴근함. ${streak}일 연속 발생.`,opener:'게시판에 도서 정리 상태를 지적하는 민원이 올라왔다.',rant:'어제도 책이 방치되어 있더니 오늘도 그대로네요. 바닥과 북카트의 책을 정리하고 퇴근해 주세요.',delivered:false};state.failures.push(c);state.complaints.push(c)}
+ return {floor,cart,hands,total,streak}
+}
+
+export function closeServiceDay(state){if(state.shiftClosed)return state.reviews.find(r=>r.day===state.day);for(let n of activeRequests(state))failRequest(state,n,'closing');let unfiledBooks=reviewUnfiledBooks(state);state.shiftClosed=true;let r={unfiledBooks,day:state.day,elapsed:state.elapsed,score:state.score,answered:state.answered,failures:state.failures.map(c=>({...c})),seniorAnger:(state.seniorAnger||[]).map(a=>({...a})),progress:{...state.progress}};state.reviews.push(r);return r}
