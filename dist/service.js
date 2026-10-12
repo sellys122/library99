@@ -4,39 +4,39 @@ export const SERVICE_LIMIT=30, MAX_INQUIRIES=4, SHIFT_SECONDS=360;
 export const CHANNELS={phone:'전화',face:'대면',board:'게시판',national:'국민신문고',city:'시청 전화',supervisor:'상급자 질책'};
 export const SERVICE_POLICY=[['운영시간','평일 09:00–18:00, 월요일 휴관'],['대출 권수','1인 5권까지 대출 가능'],['대출증','신분증 지참 → 데스크 본인 확인 → 회원 가입 및 발급'],['반납 누락','회원번호와 책 정보 확인 → 반납함·처리 기록 확인 → 결과 안내'],['프로그램','홈페이지 프로그램 메뉴에서 신청. 정원이 차면 대기 등록'],['24시간 개방','현재 운영시간을 설명하고 건의 접수. 임의로 개방을 약속하지 않음'],['주요 시설','2층 열람실, 1층 어린이자료실·자료실·전시 공간'],['프린트','1층 복사·출력 코너, A4 흑백 1면 50원'],['분실 도서','동일 도서 변상 가능 여부를 확인하고 데스크에서 안내. 바로 재대출하지 않음']];
 export const PHONE_TOPICS=[
- {id:'loan-count',subject:'대출 가능 권수',question:'한 번에 책 몇 권까지 빌릴 수 있나요?',answers:[['1인 5권까지 대출할 수 있습니다.','correct'],['1인 50권까지 가능합니다.','wrong'],['책을 그렇게 많이 빌려서 다 읽으시겠어요?','rude']]},
- {id:'hours',subject:'도서관 운영시간',question:'오늘 몇 시까지 하나요? 휴관일도 알려 주세요.',answers:[['평일은 오전 9시부터 오후 6시까지이고, 월요일은 휴관입니다.','correct'],['매일 밤 12시까지 해요. 휴관일은 없습니다.','wrong'],['문 앞에 써 있잖아요. 읽고 전화하세요.','rude']]},
- {id:'card',subject:'대출증 발급 방법',question:'처음 왔는데 대출증은 어떻게 만드나요?',answers:[['신분증을 지참해 데스크에서 본인 확인 후 회원 가입과 발급을 도와드릴게요.','correct'],['신분 확인 없이 아무 카드나 대출증으로 쓰시면 돼요.','wrong'],['그것까지 하나하나 알려드려야 해요?','rude']]},
+ {id:'loan-count',subject:'대출 가능 권수',question:'한 번에 책 몇 권까지 빌릴 수 있나요?',answers:[['1인 5권까지 대출할 수 있습니다.','correct'],['1인 25권까지 가능합니다.','wrong'],['잘 모르겠어요 제가 신입이라','rude']]},
+ {id:'hours',subject:'도서관 운영시간',question:'오늘 몇 시까지 하나요? 휴관일도 알려 주세요.',answers:[['평일은 오전 9시부터 오후 6시까지이고, 월요일은 휴관입니다.','correct'],['밤 10시까지 운영합니다.','wrong'],['평일에는 문열고, 주말에 쉬었나? 평일만 열어요.','rude']]},
+ {id:'card',subject:'대출증 발급 방법',question:'처음 왔는데 대출증은 어떻게 만드나요?',answers:[['신분증을 지참해 데스크에서 본인 확인 후 발급을 도와드릴게요.','correct'],['신분 확인 없이 아무 카드나 대출증으로 쓰시면 돼요.','wrong'],['그것까지 하나하나 알려드려야 해요?','rude']]},
  {id:'unreturned',subject:'반납했는데 대출 중으로 표시되는 책',question:'책을 반납했는데 아직 대출 중이라고 나와요!',answers:[['회원번호와 책 정보를 확인하고 반납함 및 처리 기록을 확인한 뒤 안내하겠습니다.','correct'],['이미 반납하셨으면 화면은 무시하세요. 확인은 안 해도 됩니다.','wrong'],['제 잘못은 아닌 것 같은데요. 알아서 하세요.','rude']]},
- {id:'program',subject:'뜨개질 행사 일정과 접수',question:'뜨개질 행사 언제 하나요? 신청은 어떻게 하고 몇 명까지예요?',answers:[['10월 10일 토요일 14시부터 16시, 1층 문화교실에서 12명까지 참여하며 홈페이지로 접수합니다.','correct'],['10월 10일 밤 12시에 북카트에서 열고, 접수 없이 100명까지 됩니다.','wrong'],['뜨개질도 직접 못 하면서 신청까지 알려달라 하세요?','rude']]},
- {id:'travel',subject:'세계 여행 행사 전화 접수',question:'책 한 권으로 떠나는 세계 여행 행사는 전화 신청이 되나요?',answers:[['10월 14일 수요일 16시부터 17시, 1층 전시 공간에서 20명까지 참여하며 전화 또는 데스크 방문으로 접수합니다.','correct'],['전화는 안 되고 월요일 새벽에만 신청받습니다.','wrong'],['여행 가는 것도 아닌데 그렇게 물어보실 필요 있어요?','rude']]},
- {id:'children',subject:'어린이 책 탐험 행사',question:'사서와 함께하는 어린이 책 탐험 날짜와 신청 방법을 알려 주세요.',answers:[['10월 17일 토요일 10시부터 11시 30분, 1층 어린이자료실에서 15명까지 참여하며 홈페이지 선착순 접수입니다.','correct'],['어린이 행사는 10월 14일 밤에 하며 예약 없이 50명까지 됩니다.','wrong'],['사서도 바쁜데 탐험은 집에서 하시면 안 돼요?','rude']]},
+ {id:'program',subject:'뜨개질 행사 일정과 접수',question:'뜨개질 배우는 강좌 신청하고싶어요. 언제 해요? 몇 명 받나요?',answers:[['10월 10일 토요일 14시부터 16시, 1층 문화교실에서 12명까지 참여하며 홈페이지로 접수합니다.','correct'],['10월 11일 밤 8시에 세미나실에서 열고, 전화 접수로 20명까지 됩니다.','wrong'],['제가 담당자가 아니라서 잘 몰라요. 사무실 가서 물어보실래요?','rude']]},
+ {id:'travel',subject:'세계 여행 행사 전화 접수',question:'세계 여행 강좌? 관심있는데 그게 뭐에요?',answers:[['10월 14일 수요일 16시부터 17시, 1층 전시 공간에서 20명까지 참여하며 전화 또는 데스크 방문으로 접수합니다.','correct'],['전화 접수는 안받고 있어요. 사무실로 가셔서 신청해야해요.','wrong'],['1층 아동자료실 앞에서 전시하는 행사입니다. 인원수 제한은 없으세요.','rude']]},
+ {id:'children',subject:'어린이 책 탐험 행사',question:'사서와 함께하는 어린이 책 탐험 신청하고 싶어요. 2층에서 하면 되나요?',answers:[['1층 어린이자료실에서 하고 있어요. 홈페이지로 접수하시면 되는데 도와드릴까요?','correct'],['그런 행사는 없는걸로 알고있는데요. 저는 전해들은게 없어요.','wrong'],['','rude']]},
  {id:'allnight',subject:'도서관 24시간 개방 요구',question:'제가 새벽 두 시에 책 보고 싶은데 24시간 열어 주세요!',answers:[['현재 운영시간은 9시부터 18시까지입니다. 24시간 개방 의견은 건의로 접수하겠습니다.','correct'],['알겠습니다. 오늘부터 제가 혼자 24시간 열겠습니다.','wrong'],['그럼 사서도 24시간 서 있어야 하나요? 집에 가세요.','rude']]},
  {id:'facilities',subject:'열람실과 주요 시설 유무',question:'열람실 있나요? 아이랑 갈 공간도 있나요?',answers:[['2층에 열람실이 있고, 1층에 어린이자료실과 자료실, 전시 공간이 있습니다.','correct'],['열람실도 어린이 공간도 없고 북카트에 앉으시면 됩니다.','wrong'],['도서관인데 책만 보면 되지 뭘 그렇게 찾으세요?','rude']]},
- {id:'printing',subject:'프린트기 위치와 출력 요금',question:'프린트할 수 있나요? 한 장에 얼마예요?',answers:[['1층 복사·출력 코너를 이용하실 수 있고 A4 흑백은 1면 50원입니다.','correct'],['사서 컴퓨터에서 아무거나 무료로 5천 장까지 뽑으세요.','wrong'],['집에 프린터 하나 사시면 되잖아요.','rude']]},
- {id:'lost',subject:'대출 도서 분실 처리',question:'빌린 책을 잃어버렸어요. 어떻게 해야 하나요?',answers:[['회원 정보와 도서명을 확인하고 동일 도서 변상 가능 여부를 데스크에서 안내해 드릴게요.','correct'],['괜찮아요. 분실 기록을 지우고 같은 책을 바로 또 빌려드릴게요.','wrong'],['그걸 왜 저한테 말씀하세요? 알아서 찾으세요.','rude']]}
+ {id:'printing',subject:'프린트기 위치와 출력 요금',question:'프린트할 수 있나요? 한 장에 얼마예요?',answers:[['복사 및 출력 가능하시고, A4 흑백은 1면 50원입니다.','correct'],['흑백 100원, 컬러 600원입니다.','wrong'],['제 컴퓨터에서 출력해드릴게요.','rude']]},
+ {id:'lost',subject:'대출 도서 분실 처리',question:'빌린 책을 잃어버렸어요. 어떻게 해야 하나요?',answers:[['대출증 보여주시면 확인해드릴게요. 동일한 책으로 사오시면 됩니다.','correct'],['주무관님께 여쭤볼게요 잠시만요','wrong'],['돈으로 변상해주시면 되시고, 현금만 받습니다.','rude']]}
 ];
 const NAMES=['하린','민준','지우','도윤','서연','유나','현우','은지','준서','수빈','영희','철수','복순','정호','미정','태식'];
 const RANTS=[
  '국민의 세금으로 운영되는 주제에 이런 식으로 일합니까?',
- '내가 세금을 얼마나 내는데, 이 정도 안내도 못 합니까?',
- '그러고도 사서냐는 말을 안 할 수가 없네요.',
- '이 지역의 시민을 소중하게 대해야지, 이게 무슨 짓입니까?',
- '담당자는 징계를 받아야 합니다. 책장 뒤에 숨지 마세요.',
- '높은 사람 나오라고 하세요. 북카트 말고 책임자요.',
- '제 기다린 시간도 공공재입니다. 반납 처리해 주세요.',
- '책은 청구번호대로 꽂으면서 시민의 마음은 왜 아무 데나 꽂습니까?',
- '사서의 미소까지 대출 중인가요? 언제 반납됩니까?',
- '저는 회원증도 있습니다. 회원증이 장식품입니까?',
- '이 민원은 복사해서 보관했습니다. 프린트 요금은 책임자가 내세요.',
- '저보다 북카트가 먼저 응대를 받더군요. 저도 바퀴를 달고 올까요?',
- '민원 번호를 알려 주세요. 이번엔 번호표까지 기다리라고 하지 마세요.',
- '공공서비스가 이렇게 조용해서야 되겠습니까? 제 분노만 소리가 납니다.',
- '이게 도서관입니까, 기다림을 열람하는 시설입니까?',
- '내일은 꼭 책임자를 만나겠습니다. 달력에도 적었습니다.'
+ '내가 세금을 얼마나 내는데, 지역 주민을 무시하는겁니까?',
+ '그러고도 사서입니까? 할 일도 없어보이더만.',
+ '내가 이 지역에서 30년 살았어요. 지역 주민한테 무슨짓입니까?',
+ '너가 여기 도서관 담당자야? 징계 내리라고 민원 올리겠어',
+ '여기 제일 높은사람 누구야? 이야기좀 해야겠어.',
+ '일처리를 왜이렇게 못해요? 내가 사서해도 되겠다.',
+ '하....ㅋㅋ 진짜 짜증나게하네.',
+ '여기 온지 얼마 안되었죠? 그래 보이네.',
+ '내가 국민신문고 올릴거야.',
+ '(사서의 얼굴 사진을 찍으며) 니가 누군지 기억해둘거야.',
+ '공공기관 수준이 이것밖에 안돼?',
+ '존나짜증나네. 이딴 도서관 처음봐.',
+ '너 공무원 아니야? 아...ㅋㅋ 계약직이라고? 그러니까 계약직이지.',
+ '학생. 여기 일하는거 처음이지? 주변사람들 좀 보고 배워',
+ '여기 민원 올리려면 어떻게하면되나요?'
 ];
 const LIGHT_RANTS=['잘못된 서가까지 따라갔습니다. 다음에는 분류표를 확인하고 안내해 주세요.','책을 찾으러 왔는데 엉뚱한 곳을 안내받았습니다. 친절한 설명을 부탁드립니다.','사서 안내를 믿고 찾아봤는데 그런 책이 없었습니다. 안내가 조금 더 정확했으면 합니다.','제가 찾던 책과 다른 분류였습니다. 선임께 안내 방법을 확인해 주셨으면 합니다.'];
-const OPENERS={phone:['이용자가 어제 처리되지 않은 문의에 대해 전화로 항의했다.','전날 응대에 대한 전화 민원이 접수되었다.'],face:['내가 없는 사이에 이용자가 화를 내고 갔다고 한다.','개관 전에 대면 민원인이 왔다. 아직 사서는 커피도 대출하지 못했다.'],board:['게시판 민원이 들어왔다. 느낌표가 책보다 많다.','게시판에 사서의 불친절에 대한 글이 올라왔다.'],national:['국민신문고 민원이 들어왔다. 공문 제목만으로 의자가 삐걱거린다.','국민신문고 접수 알림. 오늘의 도서관은 잠시 행정기관이다.'],city:['어제 불만을 가진 이용자가 시청에 전화를 했다고 한다.','시청에서 민원을 전달했다. 이용자의 목소리가 한 단계 위층으로 올라갔다.'],supervisor:['이용자가 팀장에게 말했고, 팀장에게 주의를 받았다.','이용자가 관장에게 항의했다. 아침부터 관장실로 호출되었다.','선임이 불렀다. “서가 안내는 대충 찍는 문제가 아니야.”','과장이 민원을 전달했다. “다음에는 분류표를 확인하세요.”']};
+const OPENERS={phone:['이용자가 어제 처리되지 않은 문의에 대해 전화로 항의했다.','전날 응대에 대한 전화 민원이 접수되었다.'],face:['내가 퇴근한 사이에 이용자가 화를 내고 갔다고 한다.','민원인이 사무실에 와서 화를 내고 갔다. 상사가 대신 사과했다.'],board:['게시판 민원이 들어왔다. 교양없는 사서라는 욕이 올라왔다.','게시판에 사서의 불친절에 대한 글이 올라왔다. 생김새 묘사를 보니 내 이야기이다.'],national:['국민신문고 민원이 들어왔다. 자료실 담당 주무관님이 한숨을 쉬며 짜증내셨다.','국민신문고 민원이 들어왔다. 내 생김새 묘사와 원색적인 비난이 가득했다.'],city:['어제 불만을 가진 이용자가 시청에 전화를 했다고 한다.','시청에서 민원을 전달했다. 관할 부서를 찾으며 해고하라고 소리질렀다고 한다'],supervisor:['이용자가 팀장에게 말했고, 팀장에게 주의를 받았다.','이용자가 관장에게 항의했다. 아침부터 관장실로 호출되었다.','자료실 담당 주무관님이 불렀다. “여기 민원 많은 도서관이라고 안들었어요?”','과장이 민원을 전달했다. “처음에는 그럴 수 있죠. 근데 앞으로는 그러지 말아야죠.”']};
 export function random(state){state.rng=((state.rng||122)*1664525+1013904223)>>>0;return state.rng/4294967296}
 export function pick(state,items){return items[Math.floor(random(state)*items.length)]}
 export function shuffle(state,items){let list=[...items];for(let i=list.length-1;i>0;i--){let j=Math.floor(random(state)*(i+1));[list[i],list[j]]=[list[j],list[i]]}return list}
@@ -64,7 +64,7 @@ export function advanceArrivals(state){if(state.shiftClosed||state.ended||state.
 }
 export function resolveRequest(state,n){if(n.resolved)return false;n.resolved=true;n.served=true;n.status=n.mode==='phone'?'gone':'leaving';state.answered++;if(state.stats&&!n.serviceCounted){state.stats.services++;n.serviceCounted=true}return true}
 export function chooseChannel(state,reason){if(reason==='recommend-empty')return 'national';if(reason==='shelf-missing')return 'board';if(reason==='shelf-wrong')return pick(state,['supervisor','board']);let value=random(state),nationalChance=reason==='rude'?.45:reason==='wrong'?.28:.12+Math.min(state.failures.length*.025,.16);if(value<nationalChance)return 'national';return pick(state,['phone','face','board','city'])}
-export function failRequest(state,n,reason='timeout',chosen=''){if(!unresolved(n))return null;if(state.stats&&!n.serviceCounted&&(n.answered||n.guideAccepted||reason==='wrong'||reason==='rude')){state.stats.services++;n.serviceCounted=true}if(n.complaintSourceId){let c=state.complaints.find(c=>c.id===n.complaintSourceId);n.resolved=true;n.status='gone';if(c)c.response+=' 항의 전화에도 제대로 응대하지 않았다.';return c||null}let response=reason==='wrong'||reason==='shelf-wrong'?`잘못된 안내: “${chosen}”`:reason==='rude'?`불친절한 응대: “${chosen}”`:reason==='shelf-missing'?'서가 정리가 제대로 되어 있지 않아 책이 제자리에 없었다.':reason==='recommend-empty'?'추천도서를 준비하겠다고 약속했지만 1분이 지나도록 한 권도 채우지 않았다.':reason==='closing'?'문의가 끝나지 않았는데 사서가 퇴근해 버렸다.':n.mode==='phone'&&!n.answered?'전화가 30초 동안 울렸는데 받지 않았다.':n.guiding?'안내하겠다고 하고 이용자를 따라오게 했지만 30초 안에 알맞은 서가를 안내하지 않았다.':n.answered?'응대 도중 30초 안에 답변을 마치지 않았다.':n.mode==='kiosk'?'대출반납기 오류 앞에 서 있었는데 30초 동안 도와주지 않았다.':n.mode==='desk'?'데스크에서 30초 동안 기다렸지만 응대받지 못했다.':'사서에게 다가가 문의했지만 30초 안에 해결해 주지 않았다.';
+export function failRequest(state,n,reason='timeout',chosen=''){if(!unresolved(n))return null;if(state.stats&&!n.serviceCounted&&(n.answered||n.guideAccepted||reason==='wrong'||reason==='rude')){state.stats.services++;n.serviceCounted=true}if(n.complaintSourceId){let c=state.complaints.find(c=>c.id===n.complaintSourceId);n.resolved=true;n.status='gone';if(c)c.response+=' 항의 전화에도 제대로 응대하지 않았다.';return c||null}let response=reason==='wrong'||reason==='shelf-wrong'?`잘못된 안내: “${chosen}”`:reason==='rude'?`불친절한 응대: “${chosen}”`:reason==='shelf-missing'?'서가 정리가 제대로 되어 있지 않아 책이 제자리에 없었다.':reason==='recommend-empty'?'추천도서를 준비하겠다고 약속했지만 1분이 지나도록 한 권도 채우지 않았다.':reason==='closing'?'도서관 이용시간이 끝나지도 않았는데 사서가 퇴근해 버렸다.':n.mode==='phone'&&!n.answered?'전화가 30초 동안 울렸는데 받지 않았다.':n.guiding?'안내하겠다고 하고 이용자를 따라오게 했지만 30초 안에 알맞은 서가를 안내하지 않았다.':n.answered?'응대 도중 30초 안에 답변을 마치지 않았다.':n.mode==='kiosk'?'대출반납기 오류 앞에 서 있었는데 30초 동안 도와주지 않았다.':n.mode==='desk'?'데스크에서 30초 동안 기다렸지만 응대받지 못했다.':'사서에게 다가가 문의했지만 30초 안에 해결해 주지 않았다.';
  n.resolved=true;n.dissatisfied=true;n.status=n.mode==='phone'?'gone':'leaving';n.failureReason=reason;let channel=chooseChannel(state,reason),c={id:n.id+'-complaint',sourceDay:state.day,deliveryDay:state.day+1,name:n.name,channel,subject:n.subject,reason,response,opener:pick(state,OPENERS[channel]),rant:pick(state,reason==='shelf-wrong'?LIGHT_RANTS:RANTS),delivered:false};state.failures.push(c);state.complaints.push(c);state.score=Math.max(0,state.score-(channel==='national'?25:10));return c
 }
 export function expireRequests(state){let expired=[];for(let n of activeRequests(state))if(!n.timerStopped&&n.deadline!=null&&state.elapsed>=n.deadline){let c=failRequest(state,n);if(c)expired.push(c)}return expired}
@@ -75,7 +75,7 @@ export function reviewUnfiledBooks(state){let floor=state.floor?.length||0,cart=
  let streak=state.unfiledBookLastDay===state.day-1?(state.unfiledBookStreak||0)+1:1;state.unfiledBookStreak=streak;state.unfiledBookLastDay=state.day;
  let counts=`바닥 ${floor}권 · 북카트 ${cart}권 · 손에 든 책 ${hands}권`,text=`퇴근 전에 책을 서가에 배가해야죠! ${counts}이 남아 있습니다.`;
  if(streak===1){state.seniorAnger??=[];state.seniorAnger.push({id:`d${state.day}-unfiled`,name:'상급자',action:'배가하지 않은 책을 남기고 퇴근함',text})}
- else{let c={id:`d${state.day}-unfiled-complaint`,sourceDay:state.day,deliveryDay:state.day+1,name:'자료실 이용자',channel:'board',subject:'이틀 연속 퇴근 때 배가되지 않은 도서',reason:'unfiled-books',response:`${counts}을 배가하지 않은 채 퇴근함. ${streak}일 연속 발생.`,opener:'게시판에 도서 정리 상태를 지적하는 민원이 올라왔다.',rant:'어제도 책이 방치되어 있더니 오늘도 그대로네요. 바닥과 북카트의 책을 정리하고 퇴근해 주세요.',delivered:false};state.failures.push(c);state.complaints.push(c)}
+ else{let c={id:`d${state.day}-unfiled-complaint`,sourceDay:state.day,deliveryDay:state.day+1,name:'자료실 이용자',channel:'board',subject:'이틀 연속 퇴근 때 배가되지 않은 도서',reason:'unfiled-books',response:`${counts}을 배가하지 않은 채 퇴근함. ${streak}일 연속 발생.`,opener:'게시판에 도서 정리 상태를 지적하는 민원이 올라왔다.',rant:'어제도 책이 방치되어 있더니 오늘도 그대로네요. 도서관이 너무 더러워요.',delivered:false};state.failures.push(c);state.complaints.push(c)}
  return {floor,cart,hands,total,streak}
 }
 
