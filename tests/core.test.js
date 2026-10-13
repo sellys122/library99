@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {CATEGORIES,makeBook,dayConfig,newProgress,complete,addProgress,canShelve,blocked,pathfind,transferBook,libraryDaylight,newDash,advanceDash,inquiryEdgePosition} from '../dist/core.js';
+import {CATEGORIES,makeBook,dayConfig,newProgress,complete,addProgress,canShelve,blocked,pathfind,transferBook,libraryDaylight,newDash,advanceDash,inquiryEdgePosition,mobileViewportLayout} from '../dist/core.js';
 import {readFileSync} from 'node:fs';
 const layout=JSON.parse(readFileSync(new URL('../dist/assets/layout.json',import.meta.url)));
 test('KDC books have decimal classification and author symbols and correct major shelf',()=>{assert.equal(CATEGORIES.length,10);for(let i=0;i<10;i++){let b=makeBook('book1',i);assert.match(b.code,/^\d{3}\.\d{1,2}[가-힣]+\d+[가-힣ㄱ-ㅎ]+$/);assert.equal(Math.floor(parseFloat(b.code)/100),i);assert.equal(canShelve(b,i),true);assert.equal(canShelve(b,(i+1)%10),false)}});
@@ -21,3 +21,5 @@ test('one dash press stays engaged after release and cannot restart until rechar
 test('inquiry direction markers stay inside the correct viewport edge',()=>{assert.equal(inquiryEdgePosition({x:500,y:300},1000,600),null);for(let [point,axis,value] of [[{x:2000,y:300},'x',970],[{x:-500,y:300},'x',30],[{x:500,y:-500},'y',30],[{x:500,y:1500},'y',570]])assert.equal(inquiryEdgePosition(point,1000,600)[axis],value)});
 
 test('activated dash drains while stationary and recharges over sixty seconds',()=>{let d=newDash();advanceDash(d,0,true,false);assert.equal(advanceDash(d,10,false,false),false);assert.equal(d.energy,10);advanceDash(d,10,false,false);assert.equal(d.energy,0);assert.equal(d.phase,'recharging');advanceDash(d,30,false,false);assert.equal(d.energy,10);advanceDash(d,30,false,false);assert.equal(d.energy,20);assert.equal(d.engaged,false);assert.equal(d.phase,'ready')});
+
+test('portrait and landscape viewport layouts keep controls inside the visible world',()=>{for(let [width,height]of [[390,844],[844,390],[360,640],[640,360],[320,568],[568,320]]){let layout=mobileViewportLayout(width,height);assert.equal(layout.portrait,height>=width);assert.ok(layout.controlsBottom+layout.controlSize<layout.worldHeight);assert.equal(layout.header+layout.footer+layout.worldHeight,height)}});
